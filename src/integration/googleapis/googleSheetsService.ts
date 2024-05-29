@@ -1,28 +1,27 @@
 import { google } from 'googleapis';
-const sheets = google.sheets("v4");
+const sheets = google.sheets('v4');
 
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
-export const getAuthTokenSingleton = (()=>{
+export const getAuthTokenSingleton = (() => {
   let authToken = null;
-  return ()=>{
-      if (!authToken) {
-        const credential = JSON.parse(
-          Buffer.from(process.env.GOOGLE_SERVICE_KEY, "base64").toString()
-        );
-        const auth = new google.auth.GoogleAuth({
-          scopes: SCOPES,
-          credentials: {
-            client_email: credential.client_email,
-            private_key: credential.private_key,
-          }
-        });
-        authToken = auth.getClient();
-      }
-      return authToken;
+  return () => {
+    if (!authToken) {
+      const credential = JSON.parse(
+        Buffer.from(process.env.GOOGLE_SERVICE_KEY, 'base64').toString(),
+      );
+      const auth = new google.auth.GoogleAuth({
+        scopes: SCOPES,
+        credentials: {
+          client_email: credential.client_email,
+          private_key: credential.private_key,
+        },
+      });
+      authToken = auth.getClient();
     }
-  }
-)();
+    return authToken;
+  };
+})();
 
 /**
  * Get values from a Spreadsheet.
@@ -77,5 +76,3 @@ export async function appendValues({
     throw err;
   }
 }
-
-

@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDesignDto } from './dto/create-design.dto';
 import { UpdateDesignDto } from './dto/update-design.dto';
-import { getAuthTokenSingleton, getSpreadSheetValues } from '../integration/googleapis/googleSheetsService';
+import {
+  getAuthTokenSingleton,
+  getSpreadSheetValues,
+} from '../integration/googleapis/googleSheetsService';
 import { Design } from './entities/design.entity';
 
 @Injectable()
@@ -12,7 +15,7 @@ export class DesignsService {
 
   async findAll() {
     const auth = await getAuthTokenSingleton();
-    const sheetName = "Designs";
+    const sheetName = 'Designs';
     const spreadsheetId = '11M1E13R23KS0udJ0i8p-Zq8V2jm1aZ8bjLjhkyKNOHI';
     const response = await getSpreadSheetValues({
       spreadsheetId,
@@ -30,7 +33,7 @@ export class DesignsService {
       design.order = Number(response[i][5]);
       designs.push(design);
     }
-    return designs.filter(design => design.isShown===true);
+    return designs.filter((design) => design.isShown === true);
   }
 
   findOne(id: number) {

@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { getAuthTokenSingleton, appendValues } from '../integration/googleapis/googleSheetsService'
+import {
+  getAuthTokenSingleton,
+  appendValues,
+} from '../integration/googleapis/googleSheetsService';
 @Injectable()
 export class OrdersService {
   async create(createOrderDto: CreateOrderDto) {
@@ -12,15 +15,15 @@ export class OrdersService {
     const values = [
       [
         createdAt.getTime(),
-        createOrderDto.name, 
-        createOrderDto.phoneNumber, 
-        createOrderDto.email, 
-        createOrderDto.qualityId, 
-        createOrderDto.sizeId, 
-        createOrderDto.designId, 
+        createOrderDto.name,
+        createOrderDto.phoneNumber,
+        createOrderDto.email,
+        createOrderDto.qualityId,
+        createOrderDto.sizeId,
+        createOrderDto.designId,
         createOrderDto.note,
         createdAt,
-      ]
+      ],
     ];
     await appendValues({
       spreadsheetId: '11M1E13R23KS0udJ0i8p-Zq8V2jm1aZ8bjLjhkyKNOHI',
@@ -28,7 +31,7 @@ export class OrdersService {
       valueInputOption: 'RAW',
       insertDataOption: 'INSERT_ROWS',
       auth: authToken,
-      values: values
+      values: values,
     });
     return 'This action adds a new order ' + JSON.stringify(createOrderDto);
   }

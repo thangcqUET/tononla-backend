@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSizeDto } from './dto/create-size.dto';
 import { UpdateSizeDto } from './dto/update-size.dto';
-import { getAuthTokenSingleton, getSpreadSheetValues } from '../integration/googleapis/googleSheetsService';
+import {
+  getAuthTokenSingleton,
+  getSpreadSheetValues,
+} from '../integration/googleapis/googleSheetsService';
 import { Size } from './entities/size.entity';
 @Injectable()
 export class SizesService {
@@ -11,7 +14,7 @@ export class SizesService {
 
   async findAll() {
     const auth = await getAuthTokenSingleton();
-    const sheetName = "Sizes";
+    const sheetName = 'Sizes';
     const spreadsheetId = '11M1E13R23KS0udJ0i8p-Zq8V2jm1aZ8bjLjhkyKNOHI';
     const response = await getSpreadSheetValues({
       spreadsheetId,
@@ -28,7 +31,7 @@ export class SizesService {
       size.order = Number(response[i][4]);
       sizes.push(size);
     }
-    return sizes.filter(size => size.isShown===true);
+    return sizes.filter((size) => size.isShown === true);
   }
 
   findOne(id: number) {
