@@ -15,7 +15,7 @@ export class SizesService {
   async findAll() {
     const auth = await getAuthTokenSingleton();
     const sheetName = 'Sizes';
-    const spreadsheetId = '11M1E13R23KS0udJ0i8p-Zq8V2jm1aZ8bjLjhkyKNOHI';
+    const spreadsheetId = process.env.SPREAD_SHEET_ID;
     const response = await getSpreadSheetValues({
       spreadsheetId,
       sheetName,

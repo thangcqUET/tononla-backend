@@ -26,7 +26,7 @@ export class OrdersService {
       ],
     ];
     await appendValues({
-      spreadsheetId: '11M1E13R23KS0udJ0i8p-Zq8V2jm1aZ8bjLjhkyKNOHI',
+      spreadsheetId: process.env.SPREAD_SHEET_ID,
       range: 'Orders!A2',
       valueInputOption: 'RAW',
       insertDataOption: 'INSERT_ROWS',
