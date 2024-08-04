@@ -7,4 +7,5 @@ export class Design {
     data: string;
     isShown: boolean;
     order: number;
+    createdAt: Date;
 }

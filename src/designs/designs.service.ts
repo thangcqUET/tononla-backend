@@ -1,16 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateDesignDto } from './dto/create-design.dto';
 import { UpdateDesignDto } from './dto/update-design.dto';
 import {
   getAuthTokenSingleton,
   getSpreadSheetValues,
+  appendValues,
 } from '../integration/googleapis/googleSheetsService';
 import { Design } from './entities/design.entity';
 
 @Injectable()
 export class DesignsService {
-  create(createDesignDto: CreateDesignDto) {
-    return 'This action adds a new design';
+  async create(createDesignDto: CreateDesignDto) {
+    // add a new design
+    const authToken = await getAuthTokenSingleton();
+    const createdAt = new Date();
+    //convert to timezone +7
+    createdAt.setHours(createdAt.getHours() + 7);
+    //verify createDesignDto.data is a valid JSON
+    try {
+      JSON.parse(createDesignDto.data);
+    } catch (error) {
+      throw new HttpException('data is not a valid JSON', HttpStatus.BAD_REQUEST);
+    }
+    const values = [
+      [
+        createdAt.getTime(),
+        createDesignDto.name,
+        createDesignDto.type=="build-in"?'build-in':'custom',
+        createDesignDto.group,
+        createDesignDto.description,
+        createDesignDto.data,
+        createDesignDto.order,
+        createDesignDto.isShown===true?'1':'0',
+        createdAt,
+      ],
+    ];
+    await appendValues({
+      spreadsheetId: process.env.SPREAD_SHEET_ID,
+      range: 'Designs!A2',
+      valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
+      auth: authToken,
+      values: values,
+    });
+    return 'This action adds a new design ' + JSON.stringify(createDesignDto);
   }
 
   async findAll() {
