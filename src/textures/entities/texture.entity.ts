@@ -1,10 +1,8 @@
-export class Design {
+export class Texture {
     id: number;
     name: string;
     type: string;
-    group: string;
-    description: string;
-    data: string;
+    imageUrl: string;
     isShown: boolean;
     order: number;
 }

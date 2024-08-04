@@ -28,11 +28,9 @@ export class DesignsService {
       design.id = Number(response[i][0]);
       design.name = response[i][1];
       design.type = response[i][2];
-      design.group = response[i][3];
-      design.description = response[i][4];
-      design.data = response[i][5];
-      design.order = Number(response[i][6]);
-      design.isShown = response[i][7] == '1';
+      design.imageUrl = response[i][3];
+      design.isShown = response[i][4] === '1';
+      design.order = Number(response[i][5]);
       designs.push(design);
     }
     return designs.filter((design) => design.isShown === true);
