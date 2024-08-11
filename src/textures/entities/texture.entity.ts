@@ -5,5 +5,5 @@ export class Texture {
     imageUrl: string;
     isShown: boolean;
     order: number;
-    thumnailUrl: string;
+    thumbnailUrl: string;
 }
