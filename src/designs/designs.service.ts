@@ -22,9 +22,10 @@ export class DesignsService {
     } catch (error) {
       throw new HttpException('data is not a valid JSON', HttpStatus.BAD_REQUEST);
     }
+    const id = createdAt.getTime();
     const values = [
       [
-        createdAt.getTime(),
+        id,
         createDesignDto.name,
         createDesignDto.type=="build-in"?'build-in':'custom',
         createDesignDto.group,
@@ -35,7 +36,7 @@ export class DesignsService {
         createdAt,
       ],
     ];
-    await appendValues({
+    const result = await appendValues({
       spreadsheetId: process.env.SPREAD_SHEET_ID,
       range: 'Designs!A2',
       valueInputOption: 'RAW',
@@ -43,7 +44,7 @@ export class DesignsService {
       auth: authToken,
       values: values,
     });
-    return 'This action adds a new design ' + JSON.stringify(createDesignDto);
+    return JSON.stringify({id, ...createDesignDto, createdAt});
   }
 
   async findAll() {
