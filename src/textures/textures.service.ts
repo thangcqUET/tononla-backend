@@ -30,7 +30,7 @@ export class TexturesService {
       design.imageUrl = response[i][3];
       design.isShown = response[i][4] === '1';
       design.order = Number(response[i][5]);
-      design.thumnailUrl = response[i][6] || response[i][3];
+      design.thumbnailUrl = response[i][6] || response[i][3];
       designs.push(design);
     }
     return designs.filter((design) => design.isShown === true);
