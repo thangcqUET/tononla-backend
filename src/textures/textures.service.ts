@@ -21,19 +21,19 @@ export class TexturesService {
       sheetName,
       auth,
     });
-    const designs: Texture[] = [];
+    const textures: Texture[] = [];
     for (let i = 1; i < response.length; i++) {
-      const design = new Texture();
-      design.id = Number(response[i][0]);
-      design.name = response[i][1];
-      design.type = response[i][2];
-      design.imageUrl = response[i][3];
-      design.isShown = response[i][4] === '1';
-      design.order = Number(response[i][5]);
-      design.thumbnailUrl = response[i][6] || response[i][3];
-      designs.push(design);
+      const texture = new Texture();
+      texture.id = Number(response[i][0]);
+      texture.name = response[i][1];
+      texture.type = response[i][2];
+      texture.imageUrl = response[i][3];
+      texture.isShown = response[i][4] === '1';
+      texture.order = Number(response[i][5]);
+      texture.thumbnailUrl = response[i][6] || response[i][3];
+      textures.push(texture);
     }
-    return designs.filter((design) => design.isShown === true);
+    return textures.filter((texture) => texture.isShown === true);
   }
 
   findOne(id: number) {
