@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 // import { ProductsModule } from './products/products.module';
 import { TexturesModule } from './textures/textures.module';
 import { DesignsModule } from './designs/designs.module';
+import { TemplatesModule } from './templates/templates.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DesignsModule } from './designs/designs.module';
     }),
     // ProductsModule,
     TexturesModule,
+    TemplatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
