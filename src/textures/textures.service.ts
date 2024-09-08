@@ -35,7 +35,7 @@ export class TexturesService {
       texture.maxScale = Number(response[i][8]) || 10;
       textures.push(texture);
     }
-    return textures.filter((texture) => texture.isShown === true);
+    return textures.filter((texture) => texture.isShown === true).sort((a, b) => a.order - b.order);
   }
 
   findOne(id: number) {
