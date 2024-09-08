@@ -6,4 +6,6 @@ export class Texture {
     isShown: boolean;
     order: number;
     thumbnailUrl: string;
+    minScale: number;
+    maxScale: number;
 }

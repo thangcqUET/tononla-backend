@@ -31,6 +31,8 @@ export class TexturesService {
       texture.isShown = response[i][4] === '1';
       texture.order = Number(response[i][5]);
       texture.thumbnailUrl = response[i][6] || response[i][3];
+      texture.minScale = Number(response[i][7]) || 5;
+      texture.maxScale = Number(response[i][8]) || 10;
       textures.push(texture);
     }
     return textures.filter((texture) => texture.isShown === true);
