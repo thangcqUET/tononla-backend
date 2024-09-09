@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TexturesModule } from './textures/textures.module';
 import { DesignsModule } from './designs/designs.module';
 import { TemplatesModule } from './templates/templates.module';
+import { DynamicContentsModule } from './dynamic-contents/dynamic-contents.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TemplatesModule } from './templates/templates.module';
     // ProductsModule,
     TexturesModule,
     TemplatesModule,
+    DynamicContentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
