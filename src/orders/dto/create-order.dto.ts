@@ -6,4 +6,5 @@ export class CreateOrderDto {
   sizeId: number;
   designId: number;
   note: string;
+  visitTime: string;
 }

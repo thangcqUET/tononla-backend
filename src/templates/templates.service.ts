@@ -33,7 +33,7 @@ export class TemplatesService {
       template.order = Number(response[i][5]);
       templates.push(template);
     }
-    return templates.filter((template) => template.isShown === true);
+    return templates.filter((template) => template.isShown === true).sort((a, b) => a.order - b.order);
   }
 
   findOne(id: number) {

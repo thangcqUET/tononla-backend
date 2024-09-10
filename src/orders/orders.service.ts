@@ -23,6 +23,7 @@ export class OrdersService {
         createOrderDto.designId,
         createOrderDto.note,
         createdAt,
+        createOrderDto.visitTime,
       ],
     ];
     await appendValues({
