@@ -36,8 +36,29 @@ export class TemplatesService {
     return templates.filter((template) => template.isShown === true).sort((a, b) => a.order - b.order);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} template`;
+  async findOne(id: number) {
+    const auth = await getAuthTokenSingleton();
+    const sheetName = 'Templates';
+    const spreadsheetId = process.env.SPREAD_SHEET_ID;
+    const response = await getSpreadSheetValues({
+      spreadsheetId,
+      sheetName,
+      auth,
+    });
+    //filter by id
+    const template = new Template();
+    for (let i = 1; i < response.length; i++) {
+      if (Number(response[i][0]) === id) {
+        template.id = Number(response[i][0]);
+        template.name = response[i][1];
+        template.designData = response[i][2];
+        template.imageUrl = response[i][3];
+        template.isShown = response[i][4] === '1';
+        template.order = Number(response[i][5]);
+        break;
+      }
+    }
+    return template;
   }
 
   update(id: number, updateTemplateDto: UpdateTemplateDto) {
