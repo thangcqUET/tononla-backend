@@ -31,6 +31,7 @@ export class TemplatesService {
       template.imageUrl = response[i][3];
       template.isShown = response[i][4] === '1';
       template.order = Number(response[i][5]);
+      template.thumbnailUrl = response[i][6] || response[i][3];
       templates.push(template);
     }
     return templates.filter((template) => template.isShown === true).sort((a, b) => a.order - b.order);
@@ -55,6 +56,7 @@ export class TemplatesService {
         template.imageUrl = response[i][3];
         template.isShown = response[i][4] === '1';
         template.order = Number(response[i][5]);
+        template.thumbnailUrl = response[i][6] || response[i][3];
         break;
       }
     }
