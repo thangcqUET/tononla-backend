@@ -6,4 +6,5 @@ export class Template {
     isShown: boolean;
     order: number;
     imageUrl: string;
+    thumbnailUrl: string;
 }
