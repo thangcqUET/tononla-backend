@@ -11,7 +11,9 @@ describe('DynamicContentsController', () => {
       providers: [DynamicContentsService],
     }).compile();
 
-    controller = module.get<DynamicContentsController>(DynamicContentsController);
+    controller = module.get<DynamicContentsController>(
+      DynamicContentsController,
+    );
   });
 
   it('should be defined', () => {

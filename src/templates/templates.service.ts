@@ -34,7 +34,9 @@ export class TemplatesService {
       template.thumbnailUrl = response[i][6] || response[i][3];
       templates.push(template);
     }
-    return templates.filter((template) => template.isShown === true).sort((a, b) => a.order - b.order);
+    return templates
+      .filter((template) => template.isShown === true)
+      .sort((a, b) => a.order - b.order);
   }
 
   async findOne(id: number) {

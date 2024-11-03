@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DynamicContentsService } from './dynamic-contents.service';
 import { CreateDynamicContentDto } from './dto/create-dynamic-content.dto';
 import { UpdateDynamicContentDto } from './dto/update-dynamic-content.dto';
 
 @Controller('dynamic-contents')
 export class DynamicContentsController {
-  constructor(private readonly dynamicContentsService: DynamicContentsService) {}
+  constructor(
+    private readonly dynamicContentsService: DynamicContentsService,
+  ) {}
 
   @Post()
   create(@Body() createDynamicContentDto: CreateDynamicContentDto) {
@@ -23,7 +33,10 @@ export class DynamicContentsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDynamicContentDto: UpdateDynamicContentDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDynamicContentDto: UpdateDynamicContentDto,
+  ) {
     return this.dynamicContentsService.update(+id, updateDynamicContentDto);
   }
 

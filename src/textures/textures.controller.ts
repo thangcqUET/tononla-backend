@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TexturesService } from './textures.service';
 import { CreateTextureDto } from './dto/create-texture.dto';
 import { UpdateTextureDto } from './dto/update-texture.dto';

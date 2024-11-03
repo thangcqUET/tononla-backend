@@ -20,19 +20,22 @@ export class DesignsService {
     try {
       JSON.parse(createDesignDto.data);
     } catch (error) {
-      throw new HttpException('data is not a valid JSON', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'data is not a valid JSON',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const id = createdAt.getTime();
     const values = [
       [
         id,
         createDesignDto.name,
-        createDesignDto.type=="build-in"?'build-in':'custom',
+        createDesignDto.type == 'build-in' ? 'build-in' : 'custom',
         createDesignDto.group,
         createDesignDto.description,
         createDesignDto.data,
         createDesignDto.order,
-        createDesignDto.isShown===true?'1':'0',
+        createDesignDto.isShown === true ? '1' : '0',
         createdAt,
       ],
     ];
@@ -44,7 +47,7 @@ export class DesignsService {
       auth: authToken,
       values: values,
     });
-    return JSON.stringify({id, ...createDesignDto, createdAt});
+    return JSON.stringify({ id, ...createDesignDto, createdAt });
   }
 
   async findAll() {
